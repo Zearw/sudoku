@@ -3,9 +3,13 @@ import { useBoard } from './hooks/useBoard'
 
 const Square = ({ children, updateBoard, index }) => {
   return (
-    <div className='square'>
-      {children}
-    </div>
+    children.map((e, i) => {
+      return (
+        <div className='square' key={i}>
+          {e.value}
+        </div>
+      )
+    })
   )
 }
 

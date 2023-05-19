@@ -12,9 +12,19 @@ export function useBoard () {
   }
 
   const configStates = (board) => {
-    if (board !== undefined) {
+    if (board) {
       if (board.newboard.grids[0].value) {
-        setBoardGame(board.newboard.grids[0].value)
+        const aux = board.newboard.grids[0].value
+        for (let fila = 0; fila < aux.length; fila++) {
+          for (let columna = 0; columna < aux[fila].length; columna++) {
+            if (aux[fila][columna] === 0) {
+              aux[fila][columna] = { value: null, blocked: false }
+            } else {
+              aux[fila][columna] = { value: aux[fila][columna], blocked: true }
+            }
+          }
+        }
+        setBoardGame(aux)
       }
       if (board.newboard.grids[0].solution) {
         setSolution(board.newboard.grids[0].solution)
