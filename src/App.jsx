@@ -3,9 +3,9 @@ import { useBoard } from './hooks/useBoard'
 
 const Square = ({ children, updateBoard, index }) => {
   return (
-    children.map((e, i) => {
+    children.map((e, indexColumna) => {
       return (
-        <div className='square' key={i}>
+        <div className={e.border} key={indexColumna}>
           {e.value}
         </div>
       )
@@ -17,13 +17,14 @@ export function App () {
   const { boardGame } = useBoard()
   return (
     <main className='board'>
+
       <h1>Sudoku</h1>
       <section className='game'>
-        {boardGame && boardGame.map((e, index) => {
+        {boardGame && boardGame.map((e, indexFila) => {
           return (
             <Square
-              key={index}
-              index={index}
+              key={indexFila}
+              index={indexFila}
             >
               {e}
             </Square>

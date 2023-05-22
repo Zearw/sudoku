@@ -61,7 +61,6 @@ body {
 .board .game {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 10px;
 }
 
 .turn {
@@ -120,12 +119,18 @@ body {
 }
 
 .square {
-  width: 100px;
-  height: 100px;
-  border: 2px solid #eee;
-  border-radius: 5px;
+  width: 90px;
+  height: 90px;
   display: grid;
   place-items: center;
   cursor: pointer;
   font-size: 48px;
+}
+
+.top_Border{
+  border-top: 2px solid white;
+}
+
+.right_Border{
+  border-right: 2px solid white;
 }
