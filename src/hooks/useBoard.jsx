@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getBoard } from '../service/board'
-import { setBoard } from '../service/setBoard'
+import { boardPartitions } from '../service/boardPartitions'
 
 export function useBoard () {
   const [boardGame, setBoardGame] = useState()
@@ -16,7 +16,7 @@ export function useBoard () {
     if (board) {
       if (board.newboard.grids[0].value) {
         const rawBoard = board.newboard.grids[0].value
-        const boardProcess = setBoard(rawBoard)
+        const boardProcess = boardPartitions(rawBoard)
 
         setBoardGame(boardProcess.rawBoard)
       }
@@ -33,10 +33,6 @@ export function useBoard () {
   }
 
   useEffect(refreshBoard, [])
-  console.log(boardGame)
-  console.log(difficulty)
-  console.log(solution)
-  console.log(message)
 
-  return { boardGame, refreshBoard }
+  return { boardGame, refreshBoard, setBoardGame }
 }

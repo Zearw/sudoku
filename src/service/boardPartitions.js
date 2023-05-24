@@ -1,4 +1,4 @@
-export function setBoard (rawBoard) {
+export function boardPartitions (rawBoard) {
   for (let fila = 0; fila < rawBoard.length; fila++) {
     for (let columna = 0; columna < rawBoard[fila].length; columna++) {
       if (rawBoard[fila][columna] === 0) {
@@ -9,7 +9,6 @@ export function setBoard (rawBoard) {
 
       if (rawBoard[fila][columna] === rawBoard[3][columna] || rawBoard[fila][columna] === rawBoard[6][columna]) {
         rawBoard[fila][columna].border = 'square top_Border'
-        console.log(rawBoard[3])
       }
 
       if (rawBoard[fila][columna] === rawBoard[fila][2] || rawBoard[fila][columna] === rawBoard[fila][5]) {

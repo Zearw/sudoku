@@ -53,7 +53,7 @@ body {
   cursor: pointer;
 }
 
-.board button:hover {
+.board button:hover, .square:hover{
   background: #eee;
   color: #222;
 }
@@ -127,10 +127,16 @@ body {
   font-size: 48px;
 }
 
+
 .top_Border{
   border-top: 2px solid white;
 }
 
 .right_Border{
   border-right: 2px solid white;
+}
+
+.blocked_number{
+  pointer-events: none;
+  color: rgb(167, 167, 167);
 }
