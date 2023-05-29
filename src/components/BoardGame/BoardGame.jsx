@@ -1,17 +1,27 @@
 import { useBoard } from '../../hooks/useBoard'
-import { Square } from '../Square/Square'
+import { Row } from '../Row/Row'
 
 export function BoardGame () {
-  const { boardGame } = useBoard()
+  const { boardGame, setBoardGame } = useBoard()
 
+  const updateBoard = (fila, columna) => {
+    const newBoard = [...boardGame]
+    if (newBoard[fila][columna].value === null || newBoard[fila][columna].value === 9) {
+      newBoard[fila][columna].value = 1
+    } else {
+      newBoard[fila][columna].value += 1
+    }
+    setBoardGame(newBoard)
+  }
   return (
     <section className='game'>
       {boardGame && boardGame.map((fila, indexFila) => {
         return (
-          <Square
+          <Row
             key={indexFila}
-            index={indexFila}
+            indexFila={indexFila}
             fila={fila}
+            updateBoard={updateBoard}
           />
         )
       })}
