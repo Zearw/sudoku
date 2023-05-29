@@ -1,20 +1,10 @@
-export const Square = ({ fila, updateBoard, index }) => {
+export function Square ({ indexFila, columna, columnaIndex, updateBoard }) {
+  const handleClick = () => {
+    updateBoard(indexFila, columnaIndex)
+  }
   return (
-    fila.map((columna, indexColumna) => {
-      console.log(columna)
-
-      const handleClick = () => {
-        if (columna.value === null) {
-          columna.value = 1
-        } else {
-          columna.value += 1
-        }
-      }
-      return (
-        <div key={indexColumna} className={columna.blocked ? `${columna.border} blocked_number` : columna.border} onClick={handleClick}>
-          {columna.value}
-        </div>
-      )
-    })
+    <div key={columnaIndex} className={columna.blocked ? `${columna.border} blocked_number` : columna.border} onClick={handleClick}>
+      {columna.value}
+    </div>
   )
 }
