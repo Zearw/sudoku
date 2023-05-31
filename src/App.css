@@ -61,6 +61,7 @@ body {
 .board .game {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+  border: 2px solid white;
 }
 
 .turn {
@@ -139,4 +140,10 @@ body {
 .blocked_number{
   pointer-events: none;
   color: rgb(167, 167, 167);
+}
+
+
+.complete_game {
+  display: grid;
+  grid-template-columns: 12% 88%;
 }
