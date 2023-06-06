@@ -1,6 +1,6 @@
 import { Square } from '../Square/Square'
 
-export function Row ({ fila, indexFila, updateBoard }) {
+export function Row ({ fila, indexFila }) {
   return (
     fila.map((columna, indexColumna) => {
       return (
@@ -9,7 +9,6 @@ export function Row ({ fila, indexFila, updateBoard }) {
           indexFila={indexFila}
           columna={columna}
           columnaIndex={indexColumna}
-          updateBoard={updateBoard}
         />
       )
     })
