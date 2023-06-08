@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import { useBoard } from '../hooks/useBoard'
+import { paintAllSquares, unpaintAllSquare } from '../service/painting'
 
 const BoardContext = createContext([])
 
@@ -9,19 +10,16 @@ export function BoardProvider ({ children }) {
   const [previusSelected, setPreviusSelected] = useState(null)
 
   const updateBoard = (fila, columna) => {
+    const newBoard = [...boardGame]
     const current = { fila, columna }
     if (squareSelected === null) {
       setSquareSelected(current)
       setPreviusSelected(current)
-      const currentSelect = document.getElementById([fila, columna])
-      currentSelect.className += ' selected'
+      paintAllSquares(newBoard, current)
     } else if (squareSelected !== current) {
-      const previusSelect = document.getElementById([previusSelected.fila, previusSelected.columna])
-      previusSelect.classList.remove('selected')
-
+      unpaintAllSquare(newBoard, previusSelected)
       setSquareSelected(current)
-      const currentSelect = document.getElementById([fila, columna])
-      currentSelect.className += ' selected'
+      paintAllSquares(newBoard, current)
       setPreviusSelected(current)
     }
   }
@@ -31,8 +29,7 @@ export function BoardProvider ({ children }) {
     const newBoard = [...boardGame]
 
     newBoard[squareSelected.fila][squareSelected.columna].value = newValue
-    const d = document.getElementById([squareSelected.fila, squareSelected.columna])
-    d.classList.remove('selected')
+    unpaintAllSquare(newBoard, squareSelected)
 
     setPreviusSelected(null)
     setBoardGame(newBoard)

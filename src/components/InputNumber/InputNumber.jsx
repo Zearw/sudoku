@@ -14,7 +14,7 @@ export function InputNumber () {
     <div className='input_numbers'>
       {numbers.map((number, i) => {
         return (
-          <div key={i} className='number' onClick={handleClickNumbers} on>
+          <div key={i} className='number' onClick={handleClickNumbers}>
             {number}
           </div>
         )

@@ -7,11 +7,10 @@ export function BoardGame () {
 
   return (
     <section className='game'>
-      {boardGame && boardGame.map((fila, indexFila) => {
+      {boardGame && boardGame.map((fila, Filaindex) => {
         return (
           <Row
-            key={indexFila}
-            indexFila={indexFila}
+            key={Filaindex}
             fila={fila}
           />
         )
