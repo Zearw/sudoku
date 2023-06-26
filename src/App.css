@@ -134,7 +134,8 @@ body {
 
 .blocked_number{
   pointer-events: none;
-  color: rgb(167, 167, 167);
+  color: rgb(245, 245, 245);
+  opacity: 70%;
 }
 
 
@@ -146,5 +147,10 @@ body {
 .selected {
   color: #fff;
   background: #09f;
-  
+  border: #fff 1px dotted;
+}
+
+
+.check_value {
+  color: red;
 }

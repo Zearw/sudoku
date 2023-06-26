@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react'
 import { useBoard } from '../hooks/useBoard'
-import { paintAllSquares, unpaintAllSquare } from '../service/painting'
+import { paintSquares } from '../service/painting'
+import { useCheck } from '../hooks/useCheck'
 
 const BoardContext = createContext([])
 
@@ -15,21 +16,21 @@ export function BoardProvider ({ children }) {
     if (squareSelected === null) {
       setSquareSelected(current)
       setPreviusSelected(current)
-      paintAllSquares(newBoard, current)
+      paintSquares(newBoard, current, 'paint')
     } else if (squareSelected !== current) {
-      unpaintAllSquare(newBoard, previusSelected)
+      paintSquares(newBoard, previusSelected)
       setSquareSelected(current)
-      paintAllSquares(newBoard, current)
+      paintSquares(newBoard, current, 'paint')
       setPreviusSelected(current)
     }
   }
 
   const updateValue = (event, squareSelected) => {
-    const newValue = event.target.innerHTML
+    const newValue = parseInt(event.target.innerHTML)
     const newBoard = [...boardGame]
-
     newBoard[squareSelected.fila][squareSelected.columna].value = newValue
-    unpaintAllSquare(newBoard, squareSelected)
+    useCheck(newBoard, squareSelected)
+    paintSquares(newBoard, squareSelected)
 
     setPreviusSelected(null)
     setBoardGame(newBoard)
