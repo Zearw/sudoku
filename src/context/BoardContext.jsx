@@ -9,6 +9,7 @@ export function BoardProvider ({ children }) {
   const { boardGame, setBoardGame } = useBoard()
   const [squareSelected, setSquareSelected] = useState(null)
   const [previusSelected, setPreviusSelected] = useState(null)
+  const validNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   const updateBoard = (fila, columna) => {
     const newBoard = [...boardGame]
@@ -25,23 +26,26 @@ export function BoardProvider ({ children }) {
     }
   }
 
-  const updateValue = (event, squareSelected) => {
-    const newValue = parseInt(event.target.innerHTML)
-    const newBoard = [...boardGame]
-    newBoard[squareSelected.fila][squareSelected.columna].value = newValue
-    useCheck(newBoard, squareSelected)
-    paintSquares(newBoard, squareSelected)
+  const updateValue = (value, squareSelected) => {
+    if (validNumbers.includes(value)) {
+      const newValue = value
+      const newBoard = [...boardGame]
+      newBoard[squareSelected.fila][squareSelected.columna].value = newValue
+      useCheck(newBoard, squareSelected)
+      paintSquares(newBoard, squareSelected)
 
-    setPreviusSelected(null)
-    setBoardGame(newBoard)
-    setSquareSelected(null)
+      setPreviusSelected(null)
+      setBoardGame(newBoard)
+      setSquareSelected(null)
+    }
   }
 
   const data = {
     updateBoard,
     boardGame,
     updateValue,
-    squareSelected
+    squareSelected,
+    validNumbers
   }
 
   return (
