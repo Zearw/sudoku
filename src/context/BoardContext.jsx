@@ -1,14 +1,15 @@
 import { createContext, useState } from 'react'
 import { useBoard } from '../hooks/useBoard'
-import { paintSquares } from '../service/painting'
-import { useCheck } from '../hooks/useCheck'
+import { paintSquares } from '../logic/painting'
+import { useCheckValues } from '../hooks/useCheckValues'
 
 const BoardContext = createContext([])
 
 export function BoardProvider ({ children }) {
-  const { boardGame, setBoardGame } = useBoard()
+  const { boardGame, setBoardGame, refreshBoard, solution } = useBoard()
   const [squareSelected, setSquareSelected] = useState(null)
   const [previusSelected, setPreviusSelected] = useState(null)
+  const [winner, setWinner] = useState(false)
   const validNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   const updateBoard = (fila, columna) => {
@@ -31,7 +32,7 @@ export function BoardProvider ({ children }) {
       const newValue = value
       const newBoard = [...boardGame]
       newBoard[squareSelected.fila][squareSelected.columna].value = newValue
-      useCheck(newBoard, squareSelected)
+      useCheckValues(newBoard, squareSelected)
       paintSquares(newBoard, squareSelected)
 
       setPreviusSelected(null)
@@ -40,12 +41,19 @@ export function BoardProvider ({ children }) {
     }
   }
 
+  const resetGame = () => {
+    refreshBoard()
+  }
+
   const data = {
     updateBoard,
     boardGame,
     updateValue,
     squareSelected,
-    validNumbers
+    validNumbers,
+    resetGame,
+    solution,
+    setWinner
   }
 
   return (
