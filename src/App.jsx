@@ -1,6 +1,7 @@
 import './App.css'
 import { BoardGame } from './components/BoardGame/BoardGame'
 import { InputNumber } from './components/InputNumber/InputNumber'
+import { SummaryGame } from './components/SummaryGame/SummaryGame'
 import { BoardProvider } from './context/BoardContext'
 
 export function App () {
@@ -12,6 +13,7 @@ export function App () {
           <InputNumber />
           <BoardGame />
         </div>
+        <SummaryGame />
       </main>
     </BoardProvider>
   )

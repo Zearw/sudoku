@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import { getBoard } from '../service/board'
-import { boardPartitions } from '../service/boardPartitions'
+import { boardPartitions } from '../logic/boardPartitions'
 
 export function useBoard () {
   const [boardGame, setBoardGame] = useState()
   const [difficulty, setDifficulty] = useState('')
   const [solution, setSolution] = useState()
-  const [message, setMessage] = useState('')
 
   const refreshBoard = () => {
     getBoard().then(board => configStates(board))
@@ -25,13 +24,10 @@ export function useBoard () {
       if (board.newboard.grids[0].difficulty) {
         setDifficulty(board.newboard.grids[0].difficulty)
       }
-      if (board.newboard.message) {
-        setMessage(board.newboard.message)
-      }
     }
   }
 
   useEffect(refreshBoard, [])
 
-  return { boardGame, refreshBoard, setBoardGame }
+  return { boardGame, refreshBoard, setBoardGame, difficulty, solution }
 }

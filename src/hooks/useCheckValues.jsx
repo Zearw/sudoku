@@ -1,6 +1,6 @@
-import { paintSquare, unpaintSquare } from '../service/painting'
+import { paintSquare, unpaintSquare } from '../logic/painting'
 
-export function useCheck (newBoard, squareSelected) {
+export function useCheckValues (newBoard, squareSelected) {
   const { fila, columna } = squareSelected
   const newValue = newBoard[fila][columna].value
   const filaIndex = newBoard[fila][columna].position.indexFila
@@ -30,7 +30,7 @@ export function useCheck (newBoard, squareSelected) {
         paintSquare(squaresSurrounding[i].position.indexFila, squaresSurrounding[i].position.indexColumna, ' check_value')
         auxValueExist = true
       } else if (auxValueExist === true) {
-        paintSquare(squareSelected.fila, squareSelected.columna, ' check_value')
+        paintSquare(fila, columna, ' check_value')
       }
     } else {
       unpaintSquare(squaresSurrounding[i].position.indexFila, squaresSurrounding[i].position.indexColumna, 'check_value')
