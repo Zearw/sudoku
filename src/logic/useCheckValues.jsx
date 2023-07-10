@@ -27,21 +27,22 @@ export function useCheckValues () {
         }
       }
     }
-
+    const aux = []
     for (let i = 0; i < squaresSurrounding.length; i++) {
       if (squaresSurrounding[i].value === newValue) {
         if (squaresSurrounding[i] !== newBoard[fila][columna]) {
-          const aux = squaresSurrounding[i]
-          assignValues(aux)
+          aux.push(squaresSurrounding[i])
           auxValueExist = true
         }
 
         if (auxValueExist === true && valueAdded === true) {
-          const aux = newBoard[fila][columna]
-          assignValues(aux)
+          aux.push(newBoard[fila][columna])
           valueAdded = false
         }
       }
+    }
+    if (aux.length > 0) {
+      assignValues(aux)
     }
   }
 
