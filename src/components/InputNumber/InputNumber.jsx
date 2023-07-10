@@ -7,7 +7,7 @@ export function InputNumber () {
 
   const handleClickNumbers = (event) => {
     const value = parseInt(event.target.innerHTML)
-    updateValue(value, squareSelected)
+    updateValue({ value, squareSelected })
   }
 
   return (

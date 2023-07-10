@@ -3,13 +3,14 @@ import BoardContext from '../../context/BoardContext'
 
 export function Square ({ columna, columnaIndex }) {
   const { updateBoard, squareSelected, updateValue } = useContext(BoardContext)
+
   const handleClick = () => {
     updateBoard(columna.position.indexFila, columna.position.indexColumna)
   }
 
   const handleKeyPressed = (e) => {
     const value = parseInt(e.key)
-    updateValue(value, squareSelected)
+    updateValue({ value, squareSelected })
   }
 
   return (
