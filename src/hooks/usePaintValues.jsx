@@ -9,7 +9,10 @@ export function usePaintValues () {
     console.log(valuesInRed)
     if (valuesInRed.length === 0 || value.length === valuesInRed.length) {
       console.log('entre al primero valueRed lenght igual a 0')
-      if (valuesInRed.length === 0) {
+      if (value.length === 0) {
+        const newValueRed = []
+        setValuesInRed(newValueRed)
+      } else if (valuesInRed.length === 0) {
         const newValueRed = [value]
         setValuesInRed(newValueRed)
       } else {
