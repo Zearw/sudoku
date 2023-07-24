@@ -1,7 +1,8 @@
 import { createContext, useState } from 'react'
 import { useBoard } from '../hooks/useBoard'
 import { paintSquares } from '../logic/painting'
-import { useCheckValues } from '../logic/useCheckValues'
+import { useCheckValues } from '../hooks/useCheckValues'
+import { usePaintValues } from '../hooks/usePaintValues'
 
 const BoardContext = createContext([])
 
@@ -10,7 +11,8 @@ export function BoardProvider ({ children }) {
   const [previusSelected, setPreviusSelected] = useState(null)
   const [winner, setWinner] = useState(false)
   const { boardGame, setBoardGame, refreshBoard, solution } = useBoard()
-  const { pushValueInRed } = useCheckValues()
+  const { pushValueInRed, checkValueInput } = useCheckValues()
+  const { resetValuesinRed } = usePaintValues()
 
   const validNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -33,18 +35,31 @@ export function BoardProvider ({ children }) {
     if (validNumbers.includes(value)) {
       const newValue = value
       const newBoard = [...boardGame]
-      newBoard[squareSelected.fila][squareSelected.columna].value = newValue
-      pushValueInRed({ newBoard, squareSelected })
-      paintSquares(newBoard, squareSelected)
+      if (newBoard[squareSelected.fila][squareSelected.columna].value === null) {
+        newBoard[squareSelected.fila][squareSelected.columna].value = newValue
+        pushValueInRed({ newBoard, squareSelected })
+        paintSquares(newBoard, squareSelected)
 
-      setPreviusSelected(null)
-      setBoardGame(newBoard)
-      setSquareSelected(null)
+        setPreviusSelected(null)
+        setBoardGame(newBoard)
+        setSquareSelected(null)
+      } else {
+        newBoard[squareSelected.fila][squareSelected.columna].value = newValue
+        checkValueInput({ newBoard, squareSelected })
+        paintSquares(newBoard, squareSelected)
+
+        setPreviusSelected(null)
+        setBoardGame(newBoard)
+        setSquareSelected(null)
+      }
     }
   }
 
   const resetGame = () => {
     refreshBoard()
+    setSquareSelected(null)
+    setPreviusSelected(null)
+    resetValuesinRed()
   }
 
   const data = {
