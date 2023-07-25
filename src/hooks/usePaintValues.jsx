@@ -44,6 +44,7 @@ export function usePaintValues () {
     console.log(valuesInRed)
     if (valuesInRed.length > 0) { // hay que poner una condicion si el valueRed es igual a []
       valuesInRed.forEach((value) => {
+        if (value.length === 0) return
         value.forEach((square) => {
           paintSquare(square.position.indexFila, square.position.indexColumna, ' check_value')
         }
