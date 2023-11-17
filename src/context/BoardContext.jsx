@@ -8,26 +8,24 @@ const BoardContext = createContext([])
 
 export function BoardProvider ({ children }) {
   const [squareSelected, setSquareSelected] = useState(null)
-  const [previusSelected, setPreviusSelected] = useState(null)
   const [winner, setWinner] = useState(false)
-  const { boardGame, setBoardGame, refreshBoard, solution } = useBoard()
+  const { boardGame, setBoardGame, refreshBoard, solution, difficulty } = useBoard()
   const { pushValueInRed, checkValueInput } = useCheckValues()
   const { resetValuesinRed } = usePaintValues()
 
   const validNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+  // Actualizo el tablero con el valor seleccionado
   const updateBoard = (fila, columna) => {
     const newBoard = [...boardGame]
     const current = { fila, columna }
     if (squareSelected === null) {
       setSquareSelected(current)
-      setPreviusSelected(current)
       paintSquares(newBoard, current, 'paint')
     } else if (squareSelected !== current) {
-      paintSquares(newBoard, previusSelected)
-      setSquareSelected(current)
+      paintSquares(newBoard, squareSelected)
       paintSquares(newBoard, current, 'paint')
-      setPreviusSelected(current)
+      setSquareSelected(current)
     }
   }
 
@@ -40,15 +38,12 @@ export function BoardProvider ({ children }) {
         pushValueInRed({ newBoard, squareSelected })
         paintSquares(newBoard, squareSelected)
 
-        setPreviusSelected(null)
         setBoardGame(newBoard)
         setSquareSelected(null)
       } else {
         newBoard[squareSelected.fila][squareSelected.columna].value = newValue
         checkValueInput({ newBoard, squareSelected })
         paintSquares(newBoard, squareSelected)
-
-        setPreviusSelected(null)
         setBoardGame(newBoard)
         setSquareSelected(null)
       }
@@ -58,11 +53,11 @@ export function BoardProvider ({ children }) {
   const resetGame = () => {
     refreshBoard()
     setSquareSelected(null)
-    setPreviusSelected(null)
     resetValuesinRed()
   }
 
   const data = {
+    difficulty,
     updateBoard,
     boardGame,
     updateValue,
