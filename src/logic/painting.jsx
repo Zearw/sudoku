@@ -8,6 +8,7 @@ export const unpaintSquare = (fila, columna, styleClass) => {
   previusSelect.classList.remove(styleClass)
 }
 
+// Pinta los cuadrados que estan en la misma fila, columna y grid que el cuadrado seleccionado
 export const paintSquares = (newBoard, square, whatToDo) => {
   const { fila, columna } = square
   const filaIndex = newBoard[fila][columna].position.indexFila

@@ -7,10 +7,12 @@ export function useBoard () {
   const [difficulty, setDifficulty] = useState('')
   const [solution, setSolution] = useState()
 
+  // Reseteo el tablero
   const refreshBoard = () => {
     getBoard().then(board => configStates(board))
   }
 
+  // Seteo el tablero traido de la API
   const configStates = (board) => {
     if (board) {
       if (board.newboard.grids[0].value) {
