@@ -1,11 +1,10 @@
 import { useContext } from 'react'
-import { useBoard } from '../../hooks/useBoard'
 import BoardContext from '../../context/BoardContext'
 import { checkWinner } from '../../logic/checkWinner'
 
+// Parte de abajo del tablero, contiene los botones de reset, check game y la dificultad
 export function SummaryGame () {
-  const { resetGame, boardGame, solution } = useContext(BoardContext)
-  const { difficulty } = useBoard()
+  const { resetGame, boardGame, solution, difficulty } = useContext(BoardContext)
 
   const handleClick = () => {
     resetGame()
