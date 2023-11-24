@@ -1,3 +1,5 @@
+import { formatting } from '../service/formate'
+
 export const paintSquare = (fila, columna, styleClass) => {
   const currentSelect = document.getElementById([fila, columna])
   currentSelect.className += styleClass
@@ -10,10 +12,7 @@ export const unpaintSquare = (fila, columna, styleClass) => {
 
 // Pinta los cuadrados que estan en la misma fila, columna y grid que el cuadrado seleccionado
 export const paintSquares = (newBoard, square, whatToDo) => {
-  const { fila, columna } = square
-  const filaIndex = newBoard[fila][columna].position.indexFila
-  const columnIndex = newBoard[fila][columna].position.indexColumna
-  const gridIndex = newBoard[fila][columna].position.indexGrid
+  const { filaIndex, columnIndex, gridIndex } = formatting({ squareSelected: square, newBoard })
   if (whatToDo === 'paint') {
     for (let x = 0; x < 9; x++) {
       for (let z = 0; z < 9; z++) {
