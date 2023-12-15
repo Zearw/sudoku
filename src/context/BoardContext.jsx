@@ -51,6 +51,10 @@ export function BoardProvider ({ children }) {
   }
 
   const resetGame = () => {
+    const newBoard = [...boardGame]
+    if (squareSelected) {
+      paintSquares(newBoard, squareSelected)
+    }
     refreshBoard()
     setSquareSelected(null)
     resetValuesinRed()
