@@ -7,27 +7,26 @@ export function usePaintValues () {
   const assignValues = (value) => {
     console.log(value)
     console.log(valuesInRed)
+    let newValueRed = []
+
     if (valuesInRed.length === 0 || value.length === valuesInRed.length) {
       console.log('entre al primero valueRed lenght igual a 0')
       if (value.length === 0) {
-        const newValueRed = []
-        setValuesInRed(newValueRed)
+        newValueRed = []
       } else if (valuesInRed.length === 0) {
-        const newValueRed = [value]
-        setValuesInRed(newValueRed)
+        newValueRed = [value]
       } else {
-        const newValueRed = value
-        setValuesInRed(newValueRed)
+        newValueRed = value
       }
     } else if (value.length > valuesInRed.length) {
       console.log('entre al segundo valuesInRed lenght menor a value')
-      const newValueRed = [...valuesInRed].concat([value])
-      setValuesInRed(newValueRed)
+      newValueRed = [...valuesInRed].concat([value])
     } else if (value.length < valuesInRed.length && value.length !== 0) {
       console.log('entre al tercero []')
-      const newValueRed = value
-      setValuesInRed([newValueRed])
+      newValueRed = [value]
     }
+    const auxNewValueRed = newValueRed.filter(value => value.length > 0)
+    setValuesInRed(auxNewValueRed)
   }
 
   const resetValuesinRed = () => {
@@ -42,14 +41,15 @@ export function usePaintValues () {
 
   useEffect(() => {
     console.log(valuesInRed)
-    if (valuesInRed.length > 0) { // hay que poner una condicion si el valueRed es igual a []
-      valuesInRed.forEach((value) => {
-        if (value.length === 0) return
-        value.forEach((square) => {
-          paintSquare(square.position.indexFila, square.position.indexColumna, ' check_value')
-        }
-        )
-      })
+    if (valuesInRed.length > 0) {
+      for (let i = 0; i < valuesInRed.length; i++) {
+        valuesInRed.forEach((value) => {
+          value.forEach((square) => {
+            paintSquare(square.position.indexFila, square.position.indexColumna, ' check_value')
+          }
+          )
+        })
+      }
     }
   }, [valuesInRed])
 
